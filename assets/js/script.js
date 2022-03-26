@@ -84,6 +84,7 @@ var answer4 = document.getElementById('4')
 var result = document.getElementById('end-screen')
 var time
 var questionArr = [] 
+var score = 0
 
 // === timer time ===
 
@@ -99,7 +100,7 @@ function quizTime() {
 
         }
     }, 1000) //setInterval
-
+    
 } //end quizTime()
 
 // === randomize questions === 
@@ -130,7 +131,7 @@ if (!randomQuestions.includes(shuffle)) {
     console.log(randomQuestions)
 }
 
-
+var showQuestion = randomQuestions.join('')
 
 // === start quiz biz ===
 
@@ -139,9 +140,15 @@ if (!randomQuestions.includes(shuffle)) {
     //hide start page
     //reveal queston page
     //call random question
-
-    
-
+function displayQuestions() {
+    var display = document.querySelector(".col-6")
+    display.addEventListener("click", function(event){
+        if (Element.matches('button')) {
+            var state = element.
+        }
+    })
+}
+   
 
 
 
