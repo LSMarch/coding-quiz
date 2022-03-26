@@ -74,14 +74,15 @@ console.log('work')
 
 // === list o' variables ===
 
-var timerEl = document.getElementById('countdown')
-var startBtn = document.getElementById('start-button')
-var quizArea = document.getElementById('question-screen')
-var answer1 = document.getElementById('1')
-var answer2 = document.getElementById('2')
-var answer3 = document.getElementById('3')
-var answer4 = document.getElementById('4')
-var result = document.getElementById('end-screen')
+var timerEl = document.getElementById('countdown') //timer on quiz start
+var startBtn = document.getElementById('start-button') //start button on start page
+var 
+// var quizArea = document.getElementById('question-screen') //
+// var answer1 = document.getElementById('1')
+// var answer2 = document.getElementById('2')
+// var answer3 = document.getElementById('3')
+// var answer4 = document.getElementById('4')
+// var result = document.getElementById('end-screen')
 var time
 var questionArr = [] 
 var score = 0

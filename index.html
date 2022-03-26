@@ -5,30 +5,48 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="./assets/css/style.css">
-    <title>Document</title>
+    <title>Coding Quiz</title>
 </head>
 <body>
-    <navbar class="col-12" id="top-bar">
-        <p id="view-scores">View Highscore</p>
-        <p id="countdown">Time</p>
-    </navbar>
+    <header>
+        <nav>
+            <a>View Highscore</a>
+            <span id="countdown"></span>
+        </nav>
+    </header>
     <!-- <header class="grid-2" id="start-screen" data-state="visible">
         <h1>Coding Quiz</h1>
         <h4>You have 1 minute to answer as many questions as you can. If you get a question wrong you are docked time. If you get a question right you get 5 points. </h4>
         <button id="start-button">Start quiz!</button>
     </header> -->
     <main>
-        <div class="col-6">
-            <div id="start-screen" data-state="visible">
-                <h1>Coding Quiz</h1>
-                <h4>You have 1 minute to answer as many questions as you can. If you get a question wrong you are docked time. If you get a question right you get 5 points. </h4>
-                <button id="start-button">Start quiz!</button>
+        <div class="container">
+            <div class="card">
+                <div class="card-bod">
+                    <h1>Coding Quiz</h1>
+                    <div class="row">
+                        <div id="main-content">
+                            <h4>You have 1 minute to answer as many questions as you can. If you get a question wrong you are docked time. If you get a question right you get 5 points.</h4>
+                            <div>
+                                <button id="start-button">Start quiz!</button>
+                            </div>
+                        </div>
+                        <div id="quiz-content"></div>
+                        <div id="user-score"></div>
+                        <div id="highscores"></div>
+                    </div>
+                </div>
             </div>
-        <!--data-question="1"--> 
+        </div>
+    </main>
+
+
+    
+        <!-- data-question="1" 
             <div class="question-screen"data-state="hidden">
                 <h2 id="question">question</h2>
                 <div id="answers">
-                <!-- buttons go here -->
+                buttons go here
                     <button class="answer" id="1">1</button>
                     <button class="answer" id="2">2</button>
                     <button class="answer" id="3">3</button>
@@ -46,14 +64,14 @@
             </div>
         </div>
     
-        <!-- <div id="end-screen" data-state="hidden">
+        <div id="end-screen" data-state="hidden">
             <form id="score-form">
                 <label></label>
                 <input>
                 <submit></submit>
             </form>
-        </div> -->
-    </main>
+        </div>
+    </main> -->
     <script src="./assets/js/script.js"></script>
     <!-- <script src="./assets/js/questions.js"></script> -->
 </body>
