@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./assets/css/style.css">
+    <title>Document</title>
+</head>
+<body>
+    <header id="start-screen" data-state="visible">
+        <h1>Coding Quiz</h1>
+        <h4>You have 1 minute to answer as many questions as you can. If you get a question wrong you are docked time. If you get a question right you get 5 points. </h4>
+        <button id="start-button">Start quiz!</button>
+    </header>
+    <navbar id="top-bar">
+        <p id="view-scores">View Highscore</p>
+        <p id="countdown">Time</p>
+    </navbar>
+    <main>
+        <div id="question-screen" data-state="hidden">
+        <!--data-question="1"--> 
+            <div class="card"data-state="hidden">
+                <h2 id="question">question</h2>
+                <div id="answers">
+                <!-- buttons go here -->
+                    <button class="answer" id="1"></button>
+                    <button class="answer" id="2"></button>
+                    <button class="answer" id="3"></button>
+                    <button class="answer" id="4"></button>
+                </div>
+            </div>
+        </div>
+    
+        <div id="end-screen" data-state="hidden">
+            <form id="score-form">
+                <label></label>
+                <input>
+                <submit></submit>
+            </form>
+        </div>
+    </main>
+    <script src="./assets/js/script.js"></script>
+    <!-- <script src="./assets/js/questions.js"></script> -->
+</body>
+</html>
