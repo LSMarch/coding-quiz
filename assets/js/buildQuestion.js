@@ -19,7 +19,7 @@ var submitBtn = document.querySelector('#submit-score')
 var alert = document.querySelector('#response')
 
 
-var savedScores = JSON.parse(localStorage.getItem('userData'))
+var savedScores = JSON.parse(localStorage.getItem('playerInfo'))
 var scoreTable = document.querySelector('#highscore-table')
 var clearBtn = document.querySelector('#clear-button')
 var backBtn = document.querySelector('#back-button')
@@ -91,18 +91,6 @@ function quizTime() {
     
 }
 
-// === score card ===
-
-function scoreCard(x,y){
-    var userInfo = {
-        inits: x,
-        userScore: y
-    }
-    totalScores.push(userInfo)
-    localStorage.setItem("userInfo", JSON.stringify(totalScores))
-
-}
-
 // === display question and answers ===
 
 function displayQuestion(question){
@@ -158,6 +146,7 @@ function result(response) {
 }
 
 function quizOver (){
+    score++
     var finalScore = document.createElement('p')
     finalScore.textContent= score
     endPage.appendChild(finalScore)
@@ -169,27 +158,83 @@ function quizOver (){
     timerEl.classList.add('d-none')
 }
 
-submitBtn.addEventListener('click', function(){
-    var name = document.querySelector('#user-input').value 
-    scoreCard(name, score)
-    hallOfFame.classList.remove('d-none')
+// === score card ===
 
-})
+// function scoreCard(){
+//     var playerInfo = {
+//          playerName: userInput.value,
+//          playerScore: score
+//         }
+
+//         totalScores.push(playerInfo)
+//     localStorage.setItem("userInfo", JSON.stringify(totalScores))
+
+//     }
+
+function scoreCard(x,y){
+    var playerInfo = {
+        inits: x,
+        userScore: y
+    }
+    totalScores.push(playerInfo)
+    localStorage.setItem("playerInfo", JSON.stringify(totalScores))
+
+}
+
+
 
 function showScores() {
-    if(savedScores !== null) {
-        var playerName = document.createElement('td')
-        userInput = playerName
-        var playerScore = document.createElement
+    if (savedScores !== null) {
+        var scoreList = document.createElement("ol");
+        scoreList.className = "scoreListClass";
+        for (var i = 0; i < savedScores.length; i++) {
+            var playerName = savedScores[i].inits;
+            var playerScore = savedScores[i].userScore
+            var playerEntry = document.createElement("li");
+            playerEntry.innerHTML = playerName + " - " + playerScore;
+            scoreList.appendChild(playerEntry);
+        }
+        hallOfFame.appendChild(scoreList);
     }
-}
+};
+
+showScores();
+   
+var savedScores = JSON.parse(localStorage.getItem('playerInfo'))
+var scoreTable = document.querySelector('#highscore-table')
+var clearBtn = document.querySelector('#clear-button')
+var backBtn = document.querySelector('#back-button')
+var hallOfFame = document.querySelector('#hall-of-fame')
+
+
+submitBtn.addEventListener('click', function(event){
+    event.preventDefault()
+    hallOfFame.classList.remove('d-none')
+    endPage.classList.add('d-none')
+    //submitBtn.classList.add('d-none')
+    userScore.classList.add('d-none')
+    // showScores(name,score)
+})
+
+submitBtn.addEventListener("click" , function(){
+    let name = document.getElementById("user-input").value
+    scoreCard(name, score)
+});
+
 
 backBtn.addEventListener('click', function(){
     hallOfFame.classList.add('d-none')
     startPage.classList.remove('d-none')
+    pageTitle.classList.remove('d-none')
+    startBtn.classList.remove('d-none')
 })
 
 clearBtn.addEventListener('click', function(){
-    scoreTable.innerHTML = ''
+    scoreList.textContent = (' ')
     window.localStorage.clear()
+    hallOfFame.classList.add('d-none')
+    startPage.classList.remove('d-none')
+    pageTitle.classList.remove('d-none')
+    startBtn.classList.remove('d-none')
 })
+

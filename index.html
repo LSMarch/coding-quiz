@@ -10,9 +10,9 @@
     <title>Coding Quiz</title>
 </head>
 <body>
-    <nav class="navbar navbar-light bg-light">
+    <nav class="navbar navbar-light bg-info">
         <div class="container-fluid">
-            <a class="" id="nav-scores-link">View Highscores</a>
+            <a class="navbar navbar-light" id="nav-scores-link">View Highscores</a>
             <span class="navbar-text" id="countdown">
             Ready
             </span>
@@ -40,28 +40,11 @@
                             <input id="user-input" type="text" class="form-control" placeholder="Enter Initials" aria-label="Recipient's username" aria-describedby="button-addon2">
                             <button class="btn btn-info" type="submit" id="submit-score">Submit</button>
                           </div>
-                        <div class="d-none" id="hall-of-fame">
-                            <table class="table" id="highscore-table">
-                                <thead>
-                                  <tr>                                
-                                    <th scope="col">Name</th>
-                                    <th scope="col">Score</th>                                    
-                                  </tr>
-                                </thead>
-                                <tbody>
-                                  <tr>
-                                    <th scope="row" id="player-names"></th>                                   
-                                  </tr>
-                                  <!-- <tr>
-                                    <th scope="row" id="">2</th>
-                                    <td>Jacob</td>
-                                    <td>Thornton</td>
-                                    <td>@fat</td>
-                                  </tr> -->
-                                </tbody>
-                              </table>
+                        <div class="d-none" id="hall-of-fame">  
+                            <div>                         
                               <button class="btn btn-info" id="clear-button">Clear Scores</button>
                               <button class="btn btn-info" id="back-button">Home</button>
+                            </div>
                         </div>
                     </div>
                 </div>
