@@ -1,41 +1,28 @@
-var questionArr =[
-    {question: "What are two words that every programmer first learned to code",
-     answer1:  "Hey, you",
-     answer2: "Ah, yeah!",
-     answer3: "Hello, world",
-     answer4: "Now what?",
-    correctAnswer: "answer3"       
+// Questions as an array of Objects
+var questions = [
+    {
+      title: 'Commonly used data types DO NOT include:',
+      choices: ['strings', 'booleans', 'alerts', 'numbers'],
+      answer: 'alerts'
     },
-    {question: "What is the golden rule of coding?",
-     answer1:  "If it works, don't touch it",
-     answer2: "Chrome DevTools is your friend",
-     answer3: "Efficiency is key",
-     answer4: "One language is all you need",
-    correctAnswer: "answer2"       
+    {
+      title: 'The condition in an if / else statement is enclosed within ____.',
+      choices: ['quotes', 'curly brackets', 'parentheses', 'square brackets'],
+      answer: 'parentheses'
+    },
+    {
+      title: 'What is the HTML tag under which one can write the JavaScript code?',
+      choices: ['<javascript>', '<scripted>', '<script>', '<js>'],
+      answer: '<script>'
+    },
+    {
+      title: ' Which of the following is the correct syntax to display “Hello Javascript” in an alert box using JavaScript?',
+      choices: ['alertbox(“Hello Javascript”);', 'msg(“Hello Javascript”);', 'msgbox(“Hello Javascript”);', 'alert(“Hello Javascript”);'],
+      answer: 'alert(“Hello Javascript”);'
+    },
+    {
+      title: 'What is the correct syntax for referring to an external script called “script.js”?',
+      choices: ['<script src=”script.js”>', '<script href=”script.js”>', '<script ref=”script.js”>', '<script name=”script.js”>'],
+      answer: '<script src=”script.js”>'
     }
-]
-
- //displays next question
- function nextQuestion(index) {
-    var currentQuestion = randomQuestions[index]
-    document.getElementById(question).innerHTML = currentQuestion.question; 
-    document.getElementById(1).innerHTML = currentQuestion.answer1;
-    document.getElementById(2).innerHTML = currentQuestion.answer2;
-    document.getElementById(3).innerHTML = currentQuestion.answer3;
-    document.getElementById(4).innerHTML = currentQuestion.answer4;
-    //console.log(currentQuestion)
-}   
-
-function checkAnswer() {
-    var currentQuestion = randomQuestions[indexnumber] //grab current question
-    var currentQuestAnswer = currentQuestion.correctAnswer //get answer
-    var answers = document.querySelector(".answer"); //grabs elements
-    var goodAnswer = null
-
-    // ??????
-    answers.forEach((answer) => {
-        if(answers.value === currentQuestAnswer) {
-            goodAnswer = answers.labels[0].id
-        }
-    }) 
-}
+  ];

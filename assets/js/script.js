@@ -1,90 +1,44 @@
-//html skeleton
-    //timer and highscore
-    //start screen 
-        //heading, rules and start button
-    //question screen
-        //questions and buttons
-        //working timer
-        //answer feedback
-    //end of game
-        //final score
-        //form and submit
-            //preventDefault
-    //only what you need
-    //stuff will be appended
-
-//javascript
-//declare variables and grab em
-    //startpage
-//create a multiple choice quiz
-    //each answer is a button
-        //eventListener("click,()")
-
-    //result will pop-up with correct/incorrect on timer
-        //if(answer correct){display correct for time} else {display wrong for time}
-        //if answer wrong timer penalty issued
-
-    //onclick next question and set of answers pops up
-
-//create timer for quiz
-    //done when timer is up
-    //done when quiz is finished
-
-//create highscores
-    //each correct answer has a point value
-    //point tracker
-    //user can input initals to store highscore
-    //localStorage
-
-//cry and call lyzzi
-
-//create array of objects holding questions...can store in different js file
-    //answer choices
-    //question text
-    //correct answer
-
-//create startquiz() function
-    //hide start screen
-    //reveal questions screen
-    //grab first question in array
-    //start timer
-
-//getquestion()
-    //create answer buttons
-
-//correctanswer()
-    //next question
-    //add points
-    //increment in index of question array
-
-//incorrectanswer()
-    //subtract time
-    //next question
-
-//endquiz()
-    //hide question
-    //reveal end screen
-    //reveal final score, submit
-
-//savescore()
-
 console.log('work')
 
 // === questions array ===
+var questionArr =[
+    {question: "What are two words that every programmer first learns to code",
+     mChoice:  ["Hey, you", "Ah, yeah!", "Hello, world", "Now what?"],    
+    correctAnswer: "Hello, world"       
+    },
+    {question: "What is the golden rule of coding?",
+     mChoice:  ["If it works, don't touch it", "Chrome DevTools is your friend", "Efficiency is key", "One language is all you need"],     
+    correctAnswer: "If it works, don't touch it"       
+    },
+    {question: "What is the biggest lie in programming?",
+    mChoice: ["You'll have fun", "HTML is a programming language", "It's easy once you understand", "It's fulfilling"],
+    correctAnswer: "HTML is a programming language"
+    },
+    {question: "What is the greatest fear of programmers?",
+    mChoice: ["Their computer will crash", "All the servers go down","Turning it off and on again doesn't work", "When they forget to save"],
+    correctAnswer: "When they forget to save"
+}]
+
+console.log(questionArr?.[0])
 
 // === list o' variables ===
 
-var timerEl = document.getElementById('countdown') //timer on quiz start
-var startBtn = document.getElementById('start-button') //start button on start page
-var 
-// var quizArea = document.getElementById('question-screen') //
-// var answer1 = document.getElementById('1')
-// var answer2 = document.getElementById('2')
-// var answer3 = document.getElementById('3')
-// var answer4 = document.getElementById('4')
-// var result = document.getElementById('end-screen')
-var time
-var questionArr = [] 
+var timerEl = document.querySelector('#countdown') //timer on quiz start
+var startBtn = document.querySelector('#start-button') //start button on start page
+var startPage = document.querySelector('#start-page') //initial page
+var pageTitle = document.querySelector('#card-title') //title of page
+var quizPage = document.querySelector('#quiz-page') // quiz
+var userScore = document.querySelector('#user-score')
+var highScore = document.querySelector('#highscores')
+var highScoreLink = document.querySelector('#highsocre-link')
+var answerResult = document.querySelector('#corretAnswer')
+
+var startText = document.querySelector('#start-page')
+var totalQuestions = questionArr.length
+var questionIndex = 0
+var correct = 0
+var question, answer1, answer2, answer3, answer4, rightAnswer, previousScores
+
 var score = 0
 
 // === timer time ===
@@ -92,65 +46,114 @@ var score = 0
 function quizTime() {
     var timeRemain = 4;
     var timeInterval = setInterval(function() {
-        if (timeRemain > 1) {
-            timerEl.textContent = "Time left: " + timeRemain 
-            timeRemain--
-        } else {
-            timerEl.textContent = ''
+        timeRemain--
+        timerEl.textContent = "Time : "+timeRemain
+        if(timeRemain <= 0 || (questionIndex > totalQuestions-1)){
             clearInterval(timeInterval)
-
-        }
-    }, 1000) //setInterval
+            //userScore.classList.add('d-none')
+            quizPage.classList.add('d-none')
+            //viewScore()
+            //clearInterval(timeInterval)
+            timerEl.textContent= ''
+        }         
+        }, 1000) 
     
 } //end quizTime()
 
-// === randomize questions === 
+// === buttons for answers ===
 
-var questionArr =[
-    {question: "What are two words that every programmer first learned to code",
-     answer1:  "Hey, you",
-     answer2: "Ah, yeah!",
-     answer3: "Hello, world",
-     answer4: "Now what?",
-    correctAnswer: "answer3"       
-    },
-    {question: "What is the golden rule of coding?",
-     answer1:  "If it works, don't touch it",
-     answer2: "Chrome DevTools is your friend",
-     answer3: "Efficiency is key",
-     answer4: "One language is all you need",
-    correctAnswer: "answer2"       
+var answersArray = [] //choice array
+var btnArray = [] //div array
+
+for(var i =0; i < 4; i++){
+    var divEl = document.createElement('div')
+    var mcBtns = document.createElement('button')
+    mcBtns.setAttribute('data-index',i)
+    mcBtns.setAttribute('class', 'btn btn-info')
+    answersArray.push(mcBtns)
+    btnArray.push(divEl) //mcBtns go in this div    
+}
+// === display right answer ===
+
+function grabQuestion () {
+    
+    
+    pageTitle.classList.add('d-none')
+    startPage.classList.add('d-none')
+    quizPage.classList.add('d-none')
+
+    if(questionIndex > totalQuestions - 1) {
+        return;
+    } else {
+        rightAnswer = questionArr[questionIndex].correctAnswer
+
+        //display question
+        pageTitle.textContent = questionArr[questionIndex].question;        
+        pageTitle.classList.remove('d-none')
     }
-]
+        for(var j = 0 ; j < 4 ; j++){
+            
+            var index = answersArray[j].getAttribute("data-index");
+            answersArray[j].textContent = question[questionIndex].mChoice[index]  
+            console.log(answersArray[j].textContent)
+            //btnArray[j].appendChild(answersArray[j]);
+            //quizPage.appendChild(btnArray[j]);
+              
+        
+     }
+    quizPage.classList.remove('d-none') // Display options
+    }    
+ 
+// === function for answers ===
 
-// to store randomized questions
-var randomQuestions = []
+quizPage.addEventListener('click', function(event){
 
-var shuffle = questionArr[Math.floor(Math.random() * (questionArr.length))]
-if (!randomQuestions.includes(shuffle)) {
-    randomQuestions.push(shuffle);
-    console.log(randomQuestions)
+    var element=event.target
+    var userChoice = element.textContent
+    var multipleChoice = userChoice.substring(3,userChoice.length)
+
+    if(userChoice === rightAnswer){
+        correct++
+
+
+        // outcome.style.display='block'
+        // answerResult.textContent = "Correct!" 
+        // setTimeout(function(){
+        //     answerResult.textContnet = "" 
+        //         },500)
+    } else {
+        timeRemain -= 5;
+        // answerResult.textContent="Wrong!"
+        // setTimeout(function(){
+        //     answerResult.textContent=''
+        // },500)
+    }
+    questionIndex++
+    grabQuestion()
+})
+
+// show score
+function endScore(){
+
+    pageTitle.textContent= "Quiz Finished";
+    pageTitle.classList.remove('d-none')
+
+    var fs = document.createElement('p');
+    fs.textContent = "Your score : "+correct;
+    userScore.appendChild.apply(fs);
+
+    var form = document.createElement('form')
+    var label = document.createElement('label')
+    label.textContent = "Enter Initials"
+
+    var text = document.createElement('input')
+    text.setAttribute("id", "userName")
+    //text.classList.add('ml-3')
 }
 
-var showQuestion = randomQuestions.join('')
-
-// === start quiz biz ===
-
-//start page
-//on startBtn
-    //hide start page
-    //reveal queston page
-    //call random question
-function displayQuestions() {
-    var display = document.querySelector(".col-6")
-    display.addEventListener("click", function(event){
-        if (Element.matches('button')) {
-            var state = element.
-        }
-    })
-}
-   
 
 
-
-startBtn.addEventListener('click', quizTime) 
+startBtn.addEventListener('click', function() {
+    quizTime()
+    grabQuestion()    
+}) 
