@@ -14,16 +14,24 @@ var quizQuestion = document.querySelector('#quiz-question')
 var quizAnswers = document.querySelector('#quiz-answers')
 var cTitle = document.querySelector('#card-title')
 var userInput = document.querySelector('#user-input')
+var endPage = document.querySelector('#final-page')
+var submitBtn = document.querySelector('#submit-score')
+var alert = document.querySelector('#response')
 
 
+var savedScores = JSON.parse(localStorage.getItem('userData'))
+var scoreTable = document.querySelector('#highscore-table')
+var clearBtn = document.querySelector('#clear-button')
+var backBtn = document.querySelector('#back-button')
+var hallOfFame = document.querySelector('#hall-of-fame')
 
-//var totalQuestions = questionArr.length;
+
 var questionIndex = 0
 var time = 20
 var correct = 0
-//var question, answer1, answer2, answer3, answer4, rightAnswer, previousScores
+
 var totalScores = []
-var savedScores = JSON.parse(localStorage.getItem('userData'))
+
 var score = 0
 var nextQuestion
 var displayQuestion
@@ -50,9 +58,8 @@ var questionArr =[
 // === start the quiz ===
 
 startBtn.addEventListener('click', quizStart)
-
-    //quizTime()
-    //grabQuestion()    
+    
+        
 
 
 // === start the quiz === actually tho ===
@@ -63,10 +70,37 @@ function quizStart(){
     startBtn.classList.add('d-none')
     quizPage.classList.remove('d-none')
     nextQuestion = questionArr[questionIndex]
+    if(savedScores !== null) {
+        totalScores = savedScores;
+    }
 
     //console.log(nextQuestion.question)
 
     displayQuestion(nextQuestion)
+    quizTime()
+}
+
+// === timer time ===
+
+function quizTime() {
+    
+    var timeInterval = setInterval(function() {
+        time--
+        timerEl.textContent = "Time : "+time        
+        }, 1000) 
+    
+}
+
+// === score card ===
+
+function scoreCard(x,y){
+    var userInfo = {
+        inits: x,
+        userScore: y
+    }
+    totalScores.push(userInfo)
+    localStorage.setItem("userInfo", JSON.stringify(totalScores))
+
 }
 
 // === display question and answers ===
@@ -78,12 +112,14 @@ function displayQuestion(question){
     // === creating buttons for answers ===
     question.mChoice.forEach(element => {
         var btn = document.createElement('button')
-        btn.className='btn btn-primary'
+        btn.className='btn btn-info col-6 mx-auto'
         btn.textContent=element
         quizAnswers.appendChild(btn)
         btn.addEventListener('click', displayNext)
     })
 }
+
+// === display next question ===
 
 function displayNext(e){
     questionIndex++
@@ -103,6 +139,8 @@ function displayNext(e){
     }
 }
 
+// === answer response ===
+
 function result(response) {
     if(response) {
         alert.textContent="You betcha!" 
@@ -120,8 +158,38 @@ function result(response) {
 }
 
 function quizOver (){
-    userScore.textContent= time
-    userInput.classList.remove('d-none')
+    var finalScore = document.createElement('p')
+    finalScore.textContent= score
+    endPage.appendChild(finalScore)
+     
+
+    endPage.classList.remove('d-none')
+    userScore.classList.remove('d-none')
     quizPage.classList.add('d-none')
     timerEl.classList.add('d-none')
 }
+
+submitBtn.addEventListener('click', function(){
+    var name = document.querySelector('#user-input').value 
+    scoreCard(name, score)
+    hallOfFame.classList.remove('d-none')
+
+})
+
+function showScores() {
+    if(savedScores !== null) {
+        var playerName = document.createElement('td')
+        userInput = playerName
+        var playerScore = document.createElement
+    }
+}
+
+backBtn.addEventListener('click', function(){
+    hallOfFame.classList.add('d-none')
+    startPage.classList.remove('d-none')
+})
+
+clearBtn.addEventListener('click', function(){
+    scoreTable.innerHTML = ''
+    window.localStorage.clear()
+})
