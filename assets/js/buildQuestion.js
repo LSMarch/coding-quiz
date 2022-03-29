@@ -74,7 +74,6 @@ function quizStart(){
         totalScores = savedScores;
     }
 
-    //console.log(nextQuestion.question)
 
     displayQuestion(nextQuestion)
     quizTime()
@@ -145,6 +144,8 @@ function result(response) {
 
 }
 
+// === end quiz ===
+
 function quizOver (){
     score++
     var finalScore = document.createElement('p')
@@ -158,19 +159,7 @@ function quizOver (){
     timerEl.classList.add('d-none')
 }
 
-// === score card ===
-
-// function scoreCard(){
-//     var playerInfo = {
-//          playerName: userInput.value,
-//          playerScore: score
-//         }
-
-//         totalScores.push(playerInfo)
-//     localStorage.setItem("userInfo", JSON.stringify(totalScores))
-
-//     }
-
+// === save input ===
 function scoreCard(x,y){
     var playerInfo = {
         inits: x,
@@ -181,7 +170,7 @@ function scoreCard(x,y){
 
 }
 
-
+// === show high scores ===
 
 function showScores() {
     if (savedScores !== null) {
@@ -200,27 +189,15 @@ function showScores() {
 
 showScores();
    
-var savedScores = JSON.parse(localStorage.getItem('playerInfo'))
-var scoreTable = document.querySelector('#highscore-table')
-var clearBtn = document.querySelector('#clear-button')
-var backBtn = document.querySelector('#back-button')
-var hallOfFame = document.querySelector('#hall-of-fame')
 
-
-submitBtn.addEventListener('click', function(event){
-    event.preventDefault()
-    hallOfFame.classList.remove('d-none')
-    endPage.classList.add('d-none')
-    //submitBtn.classList.add('d-none')
-    userScore.classList.add('d-none')
-    // showScores(name,score)
-})
+// === submit button listener ===
 
 submitBtn.addEventListener("click" , function(){
     let name = document.getElementById("user-input").value
     scoreCard(name, score)
 });
 
+// === clear and back buttons ===
 
 backBtn.addEventListener('click', function(){
     hallOfFame.classList.add('d-none')
