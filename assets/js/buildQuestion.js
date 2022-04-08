@@ -17,6 +17,7 @@ var userInput = document.querySelector('#user-input')
 var endPage = document.querySelector('#final-page')
 var submitBtn = document.querySelector('#submit-score')
 var alert = document.querySelector('#response')
+var viewScoreLink = document.querySelector("#nav-scores-link")
 
 
 var savedScores = JSON.parse(localStorage.getItem('playerInfo'))
@@ -27,7 +28,7 @@ var hallOfFame = document.querySelector('#hall-of-fame')
 
 
 var questionIndex = 0
-var time = 20
+var time = 3
 var correct = 0
 
 var totalScores = []
@@ -85,7 +86,13 @@ function quizTime() {
     
     var timeInterval = setInterval(function() {
         time--
-        timerEl.textContent = "Time : "+time        
+        timerEl.textContent = "Time : "+time
+        if(time === 0){
+            clearInterval(timeInterval)
+            quizPage.classList.add('d-none')
+            endPage.classList.remove('dnone')
+            userScore.classList.remove('d-none')
+        }        
         }, 1000) 
     
 }
@@ -147,11 +154,10 @@ function result(response) {
 // === end quiz ===
 
 function quizOver (){
-    score++
+    
     var finalScore = document.createElement('p')
     finalScore.textContent= score
-    endPage.appendChild(finalScore)
-     
+    endPage.appendChild(finalScore)     
 
     endPage.classList.remove('d-none')
     userScore.classList.remove('d-none')
@@ -195,6 +201,9 @@ showScores();
 submitBtn.addEventListener("click" , function(){
     let name = document.getElementById("user-input").value
     scoreCard(name, score)
+    hallOfFame.classList.remove('d-none')
+    endPage.classList.add('d-none')
+    userScore.classList.add('d-none')
 });
 
 // === clear and back buttons ===
@@ -207,11 +216,20 @@ backBtn.addEventListener('click', function(){
 })
 
 clearBtn.addEventListener('click', function(){
-    scoreList.textContent = (' ')
+    //scoreList.textContent = (' ')
     window.localStorage.clear()
     hallOfFame.classList.add('d-none')
     startPage.classList.remove('d-none')
     pageTitle.classList.remove('d-none')
     startBtn.classList.remove('d-none')
 })
+
+viewScoreLink.addEventListener('click', function(){
+
+    hallOfFame.classList.remove('d-none')
+    quizPage.classList.add('d-none')
+    startPage.classList.add('d-none')
+
+})
+
 
